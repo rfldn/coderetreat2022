@@ -1,18 +1,39 @@
 export function rover(input: string): string {
   const listOfInstructions = input.split('\n');
-  const initialPosition = listOfInstructions[0];
+  const mapSize = listOfInstructions[0].split(' ');
+  const map: Map = {
+    width: Number(mapSize[0]),
+    height: Number(mapSize[1])
+  };
+  let initialPosition = keepPositionInBounds(mapToPosition(listOfInstructions[1]), map);
 
-  if (listOfInstructions.length === 1) {
-    return initialPosition;
+  while (initialPosition.coordinates.x < 0 || initialPosition.coordinates.y < 0) {
+    initialPosition = keepPositionInBounds(initialPosition, map);
   }
 
-  const instructions = listOfInstructions[1].split(' ');
+  if (listOfInstructions.length < 3) {
+    return mapFromPosition(initialPosition);
+  }
+
+  const instructions = listOfInstructions[2].split(' ');
 
   const finalPosition = instructions.reduce((position, instruction) => {
-    return processInstruction(position, instruction);
-  }, mapToPosition(initialPosition));
+    return keepPositionInBounds(processInstruction(position, instruction), map);
+  }, initialPosition);
+
+  console.log(printPositionOnMap(finalPosition, map));
 
   return mapFromPosition(finalPosition);
+}
+
+export function processInstruction(initialPosition: Position, instruction: string): Position {
+  if (['f', 'b'].includes(instruction)) {
+    return processMoveInstruction(initialPosition, instruction);
+  }
+  return {
+    ...initialPosition,
+    facing: instruction
+  };
 }
 
 function processMoveInstruction(initialPosition: Position, instruction: string) {
@@ -37,14 +58,19 @@ function processMoveInstruction(initialPosition: Position, instruction: string) 
   };
 }
 
-export function processInstruction(initialPosition: Position, instruction: string): Position {
-  if (['f', 'b'].includes(instruction)) {
-    return processMoveInstruction(initialPosition, instruction);
-  }
+function keepPositionInBounds(position: Position, map: Map): Position {
   return {
-    ...initialPosition,
-    facing: instruction
-  };
+    ...position,
+    coordinates: {
+      x: (position.coordinates.x + map.width) % map.width,
+      y: (position.coordinates.y + map.height) % map.height,
+    }
+  }
+}
+
+interface Map {
+  width: number;
+  height: number;
 }
 
 interface Coordinates {
@@ -71,3 +97,36 @@ export function mapToPosition(input: string): Position {
 export function mapFromPosition(input: Position): string {
   return `${input.coordinates.x} ${input.coordinates.y} ${input.facing}`;
 }
+
+export function printPositionOnMap(position: Position, map: Map): string {
+  const rover = roverIcon(position.facing);
+  let grid = '\n';
+  for (let y = 2 * map.height; y >= 0; y--) {
+    for (let x = 0; x <= 2 * map.width; x++) {
+      if (y % 2 === 0) {
+        grid = grid + (x % 2 === 0 ? '+' : '-');
+      } else {
+        grid = grid + (x % 2 === 0 ? '|' : isRoverHere(position.coordinates, x, y) ? rover : ' ');
+      }
+    }
+    grid = grid + '\n';
+  }
+  return grid;
+}
+
+const isRoverHere = (coordinates: Coordinates, x: number, y: number): boolean => {
+  return 2 * coordinates.x + 1 === x && 2 * coordinates.y + 1 === y;
+};
+
+const roverIcon = (facing: string): string => {
+  switch (facing) {
+    case 'n':
+      return '▲';
+    case 's':
+      return '▼';
+    case 'e':
+      return '►';
+    default:
+      return '◀︎';
+  }
+};
