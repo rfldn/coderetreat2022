@@ -9,6 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("info.solidsoft.pitest") version "1.9.0"
 }
 
 repositories {
@@ -32,4 +33,8 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+tasks.named<DefaultTask> ("build") {
+    dependsOn("pitest")
 }
