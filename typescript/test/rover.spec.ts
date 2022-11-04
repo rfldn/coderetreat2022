@@ -79,7 +79,7 @@ describe('check rover', () => {
 
   describe('map printer', () => {
     it('print empty map', () => {
-      expect(printPositionOnMap(createPosition(-1, -1, 'n'), {width: 3, height: 4})).toEqual('\n' +
+      expect(printPositionOnMap(createPosition(-1, -1, 'n'), {width: 3, height: 4})).toEqual(
         '+-+-+-+\n' +
         '| | | |\n' +
         '+-+-+-+\n' +
@@ -88,10 +88,10 @@ describe('check rover', () => {
         '| | | |\n' +
         '+-+-+-+\n' +
         '| | | |\n' +
-        '+-+-+-+\n');
+        '+-+-+-+');
     });
     it('print map with rover in 0,0', () => {
-      expect(printPositionOnMap(createPosition(0, 0, 'n'), {width: 3, height: 4})).toEqual('\n' +
+      expect(printPositionOnMap(createPosition(0, 0, 'n'), {width: 3, height: 4})).toEqual(
         '+-+-+-+\n' +
         '| | | |\n' +
         '+-+-+-+\n' +
@@ -100,10 +100,10 @@ describe('check rover', () => {
         '| | | |\n' +
         '+-+-+-+\n' +
         '|▲| | |\n' +
-        '+-+-+-+\n');
+        '+-+-+-+');
     });
     it('print map with rover in 2,2', () => {
-      expect(printPositionOnMap(createPosition(2, 2, 'n'), {width: 3, height: 4})).toEqual('\n' +
+      expect(printPositionOnMap(createPosition(2, 2, 'n'), {width: 3, height: 4})).toEqual(
         '+-+-+-+\n' +
         '| | | |\n' +
         '+-+-+-+\n' +
@@ -112,7 +112,7 @@ describe('check rover', () => {
         '| | | |\n' +
         '+-+-+-+\n' +
         '| | | |\n' +
-        '+-+-+-+\n');
+        '+-+-+-+');
     });
   });
 

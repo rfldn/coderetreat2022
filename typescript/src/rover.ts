@@ -100,18 +100,16 @@ export function mapFromPosition(input: Position): string {
 
 export function printPositionOnMap(position: Position, map: Map): string {
   const rover = roverIcon(position.facing);
-  let grid = '\n';
-  for (let y = 2 * map.height; y >= 0; y--) {
-    for (let x = 0; x <= 2 * map.width; x++) {
+  return Array(2 * map.height + 1).fill(0).map((_, inverseY: number) => {
+    const y = 2 * map.height - inverseY;
+    return Array(2 * map.width + 1).fill(0).map((_, x: number) => {
       if (y % 2 === 0) {
-        grid = grid + (x % 2 === 0 ? '+' : '-');
+        return x % 2 === 0 ? '+' : '-';
       } else {
-        grid = grid + (x % 2 === 0 ? '|' : isRoverHere(position.coordinates, x, y) ? rover : ' ');
+        return x % 2 === 0 ? '|' : isRoverHere(position.coordinates, x, y) ? rover : ' ';
       }
-    }
-    grid = grid + '\n';
-  }
-  return grid;
+    }).join('');
+  }).join('\n');
 }
 
 const isRoverHere = (coordinates: Coordinates, x: number, y: number): boolean => {
