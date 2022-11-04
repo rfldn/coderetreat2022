@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/khaled/talks/coderetreat2022/csharp/SRC/SRC.csproj": {}
+  },
+  "projects": {
+    "/home/khaled/talks/coderetreat2022/csharp/SRC/SRC.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/khaled/talks/coderetreat2022/csharp/SRC/SRC.csproj",
+        "projectName": "SRC",
+        "projectPath": "/home/khaled/talks/coderetreat2022/csharp/SRC/SRC.csproj",
+        "packagesPath": "/home/khaled/.nuget/packages/",
+        "outputPath": "/home/khaled/talks/coderetreat2022/csharp/SRC/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/khaled/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/nix/store/0g0mzlwfslas5idryzvrnpzs8kj317lh-dotnet-sdk-6.0.300/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
