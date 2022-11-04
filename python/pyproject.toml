@@ -6,6 +6,7 @@ authors = ["Khaled Souf <khaled.souf@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+mutatest = "^3.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
